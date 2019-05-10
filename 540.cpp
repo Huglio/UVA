@@ -16,7 +16,7 @@ class team_queue
 	void push(pair<int, int> ToPush)
 	{
 		int i; bool FTeam = false;
-		for(i = lastindex + 1; i > 0 && !(FTeam && Vector[i].second == ToPush.second); i--)
+		for(i = lastindex + 1; i > 0 && !(FTeam && Vector[i-1].second != ToPush.second); i--)
 		{
 			if(Vector[i-1].second == ToPush.second)
 				FTeam = true;
@@ -40,11 +40,17 @@ class team_queue
 
 int main()
 {
-	team_queue q;
-	
-	int N;
+	freopen("Input.txt", "r", stdin);
+	freopen("Output.txt", "w", stdout);
+		
+	int N; int scenario = 0;
 	while(scanf("%d", &N) && N)
 	{
+		team_queue q;
+
+		scenario++;
+		printf("Scenario #%d\n", scenario);
+		
 		map<int, int> Team;
 		
 		for(int j = 0; j < N; j++)
@@ -60,7 +66,17 @@ int main()
 		string Input;
 		while(cin >> Input && Input != "STOP")
 		{
-			
+			if(Input == "ENQUEUE")
+			{
+				int x; scanf("%d", &x);
+				q.push(pair<int, int>(x, Team[x]));
+			}
+			else
+			{
+				printf("%d\n", q.front().first);
+				q.pop();
+			}
 		}
+		printf("\n");
 	}
 }
