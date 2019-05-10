@@ -10,9 +10,6 @@ using namespace std;
 
 int main()
 {
-	freopen("Input.txt", "r", stdin);
-	freopen("Output.txt", "w", stdout);
-
 	int N; int Case = 1;
 	while (scanf("%d", &N) && N)
 	{
