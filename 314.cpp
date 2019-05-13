@@ -60,7 +60,9 @@ int BFS(int Starti, int Startj, int Endi, int Endj, string Rotation)
 					
 					if(Evaluate == abs(di[k] + dj[k]))
 					{
-						
+						Pos ToPush = r;
+						ToPush.Moves += abs(di[k] + dj[k]);
+						Matrix[r.i+di[k]][r.j+dj[k]] = true;
 					}
 				}
 			}
