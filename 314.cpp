@@ -2,6 +2,7 @@
 #include <queue>
 #include <string>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -19,6 +20,9 @@ struct Pos
 int N, M;
 
 bool Matrix[55][55];
+
+int di[12] = {3, 2, 1,-1,-2,-3, 0, 0, 0, 0, 0, 0};
+int dj[12] = {0, 0, 0, 0, 0, 0, 3, 2, 1,-1,-2,-3};
 
 int BFS(int Starti, int Startj, int Endi, int Endj, string Rotation)
 {
@@ -38,7 +42,6 @@ int BFS(int Starti, int Startj, int Endi, int Endj, string Rotation)
 	queue<Pos> q;
 	Matrix[Starti][Startj] = true;
 	
-	bool Done = false;
 	while(!q.empty())
 	{
 		Pos r = q.front(); q.pop();
@@ -47,18 +50,20 @@ int BFS(int Starti, int Startj, int Endi, int Endj, string Rotation)
 			return r.Moves;
 		else
 		{
-			if(i + 3 < N && !Matrix[i+3][j] && !Matrix[i+2][j] && !Matrix[i+1][j])
-			if(j + 3 < M && !Matrix[i][j+3] && !Matrix[i][j+2] && !Matrix[i][j+1])
-			if(i + 2 < N && !Matrix[i+2][j] && !Matrix[i+1][j])
-			if(j + 2 < M && !Matrix[i][j+2] && !Matrix[i][j+1])
-			if(i + 1 < N && !Matrix[i+1][j])
-			if(j + 1 < M && !Matrix[i][j+1])
-			if(i - 1 >= 0 && !Matrix[i-1][j])
-			if(j - 1 >= 0 && !Matrix[i][j-1])
-			if(i - 2 >= 0 && !Matrix[i-2][j] && !Matrix[i-1][j])
-			if(j - 2 >= 0 && !Matrix[i][j-2] && !Matrix[i][j-1])
-			if(i - 3 >= 0 && !Matrix[i-3][j] && !Matrix[i-2][j] && !Matrix[i-1][j])
-			if(j - 3 >= 0 && !Matrix[i][j-3] && !Matrix[i][j-2] && !Matrix[i][j-1])
+			for(int k = 0; k < 12; k++)
+			{
+				if(r.i + di[k] < N && r.i + di[k] >= 0 && r.j + dj[k] < M && r.j + dj[k] >= 0)
+				{
+					int Evaluate;
+					for(Evaluate = 0; Evaluate < abs(di[k] + dj[k]) && Matrix[r.i+di[k]][r.j+dj[k]]; Evaluate++);
+					
+					
+					if(Evaluate == abs(di[k] + dj[k]))
+					{
+						
+					}
+				}
+			}
 		}
 	}
 	
@@ -98,7 +103,8 @@ int main()
 			else
 				Matrix[i][j] = true;
 		}
-
+	
+	N++, M++;
 	int Si, Sj, Ei, Ej; string R;
 	scanf("%d %d %d %d", &Si, &Sj, &Ei, &Ej);
 	cin >> R;
