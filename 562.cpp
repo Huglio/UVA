@@ -7,8 +7,9 @@ using namespace std;
 
 int n;
 int coins[100];
+int soma;
 
-int pd[110][1000000];
+int pd[100][50000];
 
 int f(int item, int subtracter, int adder)
 {
@@ -19,7 +20,9 @@ int f(int item, int subtracter, int adder)
 		return pd[item][subtracter];
 
 	int resp = f(item + 1, subtracter, adder);
-	resp = min(resp, f(item + 1, subtracter - coins[item], adder + coins[item]));
+	
+	if(subtracter - coins[item] >= soma/2)
+		resp = min(resp, f(item + 1, subtracter - coins[item], adder + coins[item]));
 
 	return pd[item][subtracter] = resp;
 }
@@ -34,7 +37,7 @@ int main()
 	{
 		memset(pd, -1, sizeof pd);
 
-		int soma = 0;
+		soma = 0;
 		scanf("%d", &n);
 		for (int j = 0; j < n; j++)
 		{
