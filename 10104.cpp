@@ -1,13 +1,12 @@
 #include <stdio.h>
-#include <cmath>
 
 using namespace std;
 
 int x, y, d;
-
 void extendedEuclid(int a, int b)
 {
 	if(b == 0) {x = 1; y = 0; d = a; return; }
+	
 	extendedEuclid(b, a % b);
 	
 	int x1 = y;
@@ -19,20 +18,10 @@ void extendedEuclid(int a, int b)
 
 int main()
 {
-	int TC; scanf("%d", &TC);
-	
-	while(TC--)
+	int a, b;
+	while(scanf("%d %d", &a, &b) != EOF)
 	{
-		int r, s; scanf("%d %d", &r, &s);
-		
-		int a = int(floor(float(r) / s));
-		int b = int(ceil(float(r) / s));
-		
 		extendedEuclid(a, b);
-		int mult = r / d;
-		x = x * mult;
-		y = y * mult;
-		
-		printf("%d %d\n", x, y);
+		printf("%d %d %d\n", x, y, d);
 	}
 }
